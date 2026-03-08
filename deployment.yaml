@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment-cruzrios
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-site
+  template:
+    metadata:
+      labels:
+        app: web-site
+    spec:
+      containers:
+      - name: web-container
+        image: mt-05-cruzrios:v2  # ← Changed from v1 to v2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80

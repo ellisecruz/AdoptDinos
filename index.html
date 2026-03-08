@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adopt-A-Saurus | Home</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Bubblegum+Sans&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-circle"><img src="Paw_symbol.png" alt="paw" /></div>
+      <span class="logo-text">Adopt-A-Saurus</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="dinosaurs.html" class="nav-link">Our Dinosaurs</a></li>
+      <li><a href="contact.html" class="nav-link nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+    <div class="hero">
+      <h1 class="hero-title">Welcome to<br>Adopt-A-Saurus!</h1>
+      <p class="hero-sub"><em>Where tiny roars find forever homes.</em></p>
+      <div class="hero-btns">
+        <a href="dinosaurs.html" class="btn-outline">ADOPT</a>
+        <a href="contact.html" class="btn-outline">DONATE</a>
+      </div>
+    </div>
+
+    <div class="featured-dinos">
+      <div class="dino-card featured" data-key="baby-dina" onclick="openModal('baby-dina')">
+        <div class="card-footprint">🐾</div>
+        <h3 class="card-name">Baby Dina</h3>
+        <div class="card-img-wrap"></div>
+      </div>
+      <div class="dino-card featured" data-key="bumpy" onclick="openModal('bumpy')">
+        <div class="card-footprint">🐾</div>
+        <h3 class="card-name">Bumpy</h3>
+        <div class="card-img-wrap"></div>
+      </div>
+      <div class="dino-card featured" data-key="alpha" onclick="openModal('alpha')">
+        <div class="card-footprint">🐾</div>
+        <h3 class="card-name">Alpha</h3>
+        <div class="card-img-wrap"></div>
+      </div>
+    </div>
+
+    <div class="more-btn-wrap">
+      <a href="dinosaurs.html" class="btn-outline">MORE DINOSAURS</a>
+    </div>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="dinoModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-footprint">🐾</div>
+      <h2 class="modal-name" id="modalName"></h2>
+      <div class="modal-img-wrap" id="modalImgWrap">
+        <img id="modalImg" src="" alt="" />
+      </div>
+      <div class="modal-details">
+        <div class="modal-meta">
+          <span id="modalType"></span>
+          <span id="modalAge"></span>
+          <span id="modalSex"></span>
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+      </div>
+      <a href="dinosaurs.html" class="btn-outline modal-adopt-btn">ADOPT ME!</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>ABOUT</h4>
+        <ul>
+          <li><a href="about.html">History</a></li>
+          <li><a href="about.html">Mission and Vision</a></li>
+          <li><a href="about.html">Objectives</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li><a href="contact.html">Location</a></li>
+          <li><a href="#">News and Updates</a></li>
+          <li><a href="dinosaurs.html">Our Dinosaurs</a></li>
+          <li><a href="dinosaurs.html">Adoption</a></li>
+          <li><a href="contact.html">Donation</a></li>
+          <li><a href="#">FAQS</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACT US</h4>
+        <p>📞 +63 (46) 123.4567</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon">f</a>
+          <a href="#" class="social-icon">ig</a>
+          <a href="#" class="social-icon">tw</a>
+          <a href="#" class="social-icon">yt</a>
+          <a href="#" class="social-icon">in</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-version">The current version of this app is v2</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

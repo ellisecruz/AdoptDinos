@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adopt-A-Saurus | Our Dinosaurs</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Bubblegum+Sans&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-circle"><img src="Paw_symbol.png" alt="paw" /></div>
+      <span class="logo-text">Adopt-A-Saurus</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="dinosaurs.html" class="nav-link active">Our Dinosaurs</a></li>
+      <li><a href="contact.html" class="nav-link nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+    <div class="dinos-content">
+      <h1 class="dinos-title">Meet Our Dinosaurs!</h1>
+      <p class="dinos-sub"><em>Adopt a dino. Start a roar-some adventure.</em></p>
+
+      <div class="dino-grid">
+        <div class="dino-card" data-key="baby-dina" onclick="openModal('baby-dina')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">BABY DINA</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+        <div class="dino-card" data-key="bumpy" onclick="openModal('bumpy')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">BUMPY</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+        <div class="dino-card" data-key="alpha" onclick="openModal('alpha')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">ALPHA</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+        <div class="dino-card" data-key="dino" onclick="openModal('dino')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">DINO</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+        <div class="dino-card" data-key="omen" onclick="openModal('omen')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">OMEN</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+        <div class="dino-card" data-key="zil" onclick="openModal('zil')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">ZIL</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+        <div class="dino-card" data-key="bok" onclick="openModal('bok')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">BOK</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+        <div class="dino-card" data-key="rehd" onclick="openModal('rehd')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">REHD</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+        <div class="dino-card" data-key="sage" onclick="openModal('sage')">
+          <div class="card-footprint">🐾</div>
+          <h3 class="card-name">SAGE</h3>
+          <div class="card-img-wrap"></div>
+        </div>
+      </div>
+
+      <div class="dinos-btns">
+        <a href="contact.html" class="btn-outline">ADOPT</a>
+        <a href="contact.html" class="btn-outline">DONATE</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="dinoModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-footprint">🐾</div>
+      <h2 class="modal-name" id="modalName"></h2>
+      <div class="modal-img-wrap" id="modalImgWrap">
+        <img id="modalImg" src="" alt="" />
+      </div>
+      <div class="modal-details">
+        <div class="modal-meta">
+          <span id="modalType"></span>
+          <span id="modalAge"></span>
+          <span id="modalSex"></span>
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+      </div>
+      <a href="contact.html" class="btn-outline modal-adopt-btn">ADOPT ME!</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>ABOUT</h4>
+        <ul>
+          <li><a href="about.html">History</a></li>
+          <li><a href="about.html">Mission and Vision</a></li>
+          <li><a href="about.html">Objectives</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li><a href="contact.html">Location</a></li>
+          <li><a href="#">News and Updates</a></li>
+          <li><a href="dinosaurs.html">Our Dinosaurs</a></li>
+          <li><a href="dinosaurs.html">Adoption</a></li>
+          <li><a href="contact.html">Donation</a></li>
+          <li><a href="#">FAQS</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACT US</h4>
+        <p>📞 +63 (46) 123.4567</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon">f</a>
+          <a href="#" class="social-icon">ig</a>
+          <a href="#" class="social-icon">tw</a>
+          <a href="#" class="social-icon">yt</a>
+          <a href="#" class="social-icon">in</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-version">The current version of this app is v2</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
