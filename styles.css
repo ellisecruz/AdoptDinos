@@ -210,6 +210,18 @@ body {
   object-fit: cover;
 }
 
+/* small action buttons inside cards */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.card-actions .btn-outline {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
 /* ===== DINOSAUR GRID PAGE ===== */
 .dino-grid {
   display: grid;

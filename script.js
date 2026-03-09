@@ -72,35 +72,35 @@ const prodData = {
     type: 'Plants, Tree seed, and Fruits',
     price: 'Php 5,000.00',
     desc: 'Grass, leaves, and fruits to keep your herbivorous dino friends happy and healthy.',
-    img: 'Dino Images/Dino Food Herb.svg'
+    img: 'Product Images/prod1.jpg'
   },
   'dino-food-carn': {
     name: 'FOOD - CARNIVORE',
-    type: 'Egg and Meat',
+    type: 'Meat',
     price: 'Php 3,000.00',
     desc: 'High-protein diet for your carnivorous dino friends.',
-    img: 'Dino Images/Dino Food Carn.svg'
+    img: 'Product Images/prod2.png'
   },
   'dino-egg': {
     name: 'DINO EGG',
-    type: '',
+    type: 'Egg',
     price: 'Php 10,500.00',
     desc: 'Different Species.',
-    img: 'Dino Images/Dino Egg.svg'
+    img: 'Product Images/prod3.avif'
   },
   'whistle': {
     name: 'WHISTLE',
     type: 'Aluminum',
     price: 'Php 650.00',
     desc: 'Used to control dinosaurs.',
-    img: 'Dino Images/Whistle.svg'
+    img: 'Product Images/prod4.webp'
   },
   'collar': {
     name: 'COLLAR',
     type: 'Chains',
     price: 'Php 775.00',
     desc: 'A piece of material put around the neck.',
-    img: 'Dino Images/Collar.svg'
+    img: 'Product Images/prod5.webp'
   },
 };
 
@@ -113,61 +113,63 @@ function getLocalImgPath(key) {
   // encode spaces so the browser can resolve the URL even though the folder contains a space
   return `Dino%20Images/${encodeURIComponent(filename)}`;
 }
-
-function openModal(key) {
-  const prod = prodData[key];
-  const dino = dinoData[key];
-
-  // neither found -> nothing to show
-  if (!prod && !dino) return;
-
+// set modal content and show overlay
+function displayModalContent({ name = '', type = '', price = '', desc = '', imgSrc = '' }, overlayId, extra = {}) {
   const imgWrap = document.getElementById('modalImgWrap');
   const img = document.getElementById('modalImg');
+  const nameEl = document.getElementById('modalName');
+  const typeEl = document.getElementById('modalType');
+  const priceEl = document.getElementById('modalPrice');
+  const descEl = document.getElementById('modalDesc');
+
+  if (nameEl) nameEl.textContent = name;
+  if (typeEl) typeEl.textContent = type;
+  if (priceEl) priceEl.textContent = price;
+  if (descEl) descEl.textContent = desc;
+
+  if (img && imgSrc) {
+    img.src = imgSrc;
+    img.style.display = 'block';
+    if (imgWrap) imgWrap.classList.remove('no-img');
+  } else if (img) {
+    img.src = '';
+    img.style.display = 'none';
+    if (imgWrap) imgWrap.classList.add('no-img');
+  }
+
+  const overlay = document.getElementById(overlayId);
+  if (overlay) overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openModal(key) {
+  const dino = dinoData[key];
+  const prod = prodData[key];
+  if (!dino && !prod) return;
 
   if (dino) {
-    document.getElementById('modalName').textContent = dino.name;
-    const typeEl = document.getElementById('modalType'); if (typeEl) typeEl.textContent = '🦕 ' + dino.type;
-    const ageEl = document.getElementById('modalAge'); if (ageEl) ageEl.textContent = '🗓 Age ' + dino.age;
-    const sexEl = document.getElementById('modalSex'); if (sexEl) sexEl.textContent = dino.sex === 'F' ? '♀ Female' : '♂ Male';
-    const descEl = document.getElementById('modalDesc'); if (descEl) descEl.textContent = dino.desc;
+    displayModalContent({
+      name: dino.name,
+      type: dino.type ? '🦕 ' + dino.type : '',
+      desc: dino.desc,
+      imgSrc: dino.img || getLocalImgPath(key)
+    }, 'dinoModal');
 
-    const src = dino.img || getLocalImgPath(key);
-    if (img && src) {
-      img.src = src;
-      img.style.display = 'block';
-      if (imgWrap) imgWrap.classList.remove('no-img');
-    } else if (img) {
-      img.src = '';
-      img.style.display = 'none';
-      if (imgWrap) imgWrap.classList.add('no-img');
-    }
-
-    const modalEl = document.getElementById('dinoModal');
-    if (modalEl) modalEl.classList.add('active');
+    const ageEl = document.getElementById('modalAge');
+    const sexEl = document.getElementById('modalSex');
+    if (ageEl) ageEl.textContent = '🗓 Age ' + (dino.age || '');
+    if (sexEl) sexEl.textContent = dino.sex === 'F' ? '♀ Female' : '♂ Male';
   }
 
   if (prod) {
-    document.getElementById('modalName').textContent = prod.name ? 'Product: ' + prod.name : '';
-    const typeEl = document.getElementById('modalType'); if (typeEl) typeEl.textContent = prod.type ? 'Type: ' + prod.type : '';
-    const priceEl = document.getElementById('modalPrice'); if (priceEl) priceEl.textContent = prod.price ? 'Price: ' + prod.price : '';
-    const descEl = document.getElementById('modalDesc'); if (descEl) descEl.textContent = prod.desc;
-
-    const src = prod.img || getLocalImgPath(key);
-    if (img && src) {
-      img.src = src;
-      img.style.display = 'block';
-      if (imgWrap) imgWrap.classList.remove('no-img');
-    } else if (img) {
-      img.src = '';
-      img.style.display = 'none';
-      if (imgWrap) imgWrap.classList.add('no-img');
-    }
-
-    const modalEl = document.getElementById('prodModal');
-    if (modalEl) modalEl.classList.add('active');
+    displayModalContent({
+      name: prod.name ? 'Product: ' + prod.name : '',
+      type: prod.type ? 'Type: ' + prod.type : '',
+      price: prod.price ? 'Price: ' + prod.price : '',
+      desc: prod.desc,
+      imgSrc: prod.img || getLocalImgPath(key)
+    }, 'prodModal');
   }
-
-  document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
@@ -178,48 +180,31 @@ function closeModal() {
 
 // when the page finishes loading, fill thumbnails and wire up the modal overlay
 function populateCards() {
-  document.querySelectorAll('.dino-card').forEach(card => {
-    const key = card.dataset.key || (card.getAttribute('onclick')?.match(/openModal\('(.+)'\)/)?.[1]);
-    if (!key) return;
-    const dino = dinoData[key];
-    if (!dino) return;
-    const imgWrap = card.querySelector('.card-img-wrap');
-    let src = dino.img || getLocalImgPath(key);
-    if (!src) {
-      imgWrap.classList.add('no-img');
-      return;
-    }
-    const imgEl = document.createElement('img');
-    imgEl.src = src;
-    imgEl.alt = dino.name;
-    imgEl.addEventListener('error', () => {
-      imgWrap.classList.add('no-img');
-      imgEl.remove();
+  function populate(selector, dataObj) {
+    document.querySelectorAll(selector).forEach(card => {
+      const key = card.dataset.key || (card.getAttribute('onclick')?.match(/openModal\('(.+)'\)/)?.[1]);
+      if (!key) return;
+      const item = dataObj[key];
+      if (!item) return;
+      const imgWrap = card.querySelector('.card-img-wrap');
+      const src = item.img || getLocalImgPath(key);
+      if (!src) {
+        if (imgWrap) imgWrap.classList.add('no-img');
+        return;
+      }
+      const imgEl = document.createElement('img');
+      imgEl.src = src;
+      imgEl.alt = item.name || '';
+      imgEl.addEventListener('error', () => {
+        if (imgWrap) imgWrap.classList.add('no-img');
+        imgEl.remove();
+      });
+      if (imgWrap) imgWrap.appendChild(imgEl);
     });
-    imgWrap.appendChild(imgEl);
-  });
+  }
 
-  // populate product thumbnails similarly
-  document.querySelectorAll('.prod-card').forEach(card => {
-    const key = card.dataset.key || (card.getAttribute('onclick')?.match(/openModal\('(.+)'\)/)?.[1]);
-    if (!key) return;
-    const prod = prodData[key];
-    if (!prod) return;
-    const imgWrap = card.querySelector('.card-img-wrap');
-    let src = prod.img || getLocalImgPath(key);
-    if (!src) {
-      imgWrap.classList.add('no-img');
-      return;
-    }
-    const imgEl = document.createElement('img');
-    imgEl.src = src;
-    imgEl.alt = prod.name;
-    imgEl.addEventListener('error', () => {
-      imgWrap.classList.add('no-img');
-      imgEl.remove();
-    });
-    imgWrap.appendChild(imgEl);
-  });
+  populate('.dino-card', dinoData);
+  populate('.prod-card', prodData);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -232,16 +217,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-// Contact form send handler
-function handleSend(e) {
-  e.preventDefault();
-  const btn = e.target;
-  btn.textContent = 'SENT! 🦕';
-  btn.style.background = 'var(--tan)';
-  btn.style.color = 'var(--brown-dark)';
-  setTimeout(() => {
-    btn.textContent = 'SEND MESSAGE';
-    btn.style.background = '';
-    btn.style.color = '';
-  }, 3000);
+// simple add-to-cart handler for product cards
+function addToCart(key) {
+  const prod = prodData[key];
+  const card = document.querySelector(`.prod-card[data-key="${key}"]`);
+  if (!card) {
+    console.log('addToCart: card not found', key);
+    return;
+  }
+  const btn = card.querySelector('button.btn-outline');
+  if (btn) {
+    btn.textContent = 'Added ✓';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'ADD TO CART'; btn.disabled = false; }, 1500);
+  }
+  console.log('Added to cart:', prod ? prod.name : key);
 }
